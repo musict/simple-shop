@@ -1,13 +1,13 @@
 {
-	"1" : {
-		"name" : "Яблоки",
+	"Apple" : {
+		"name" : "Яблоко",
 		"cost" : 44.2,
 		"description" : "Сочные, спелые",
 		"order" : 10,
 		"img" : "apple.png"
 	},
 
-	"2" : {
+	"Cherry" : {
 		"name" : "Вишня",
 		"cost" : 99.2,
 		"description" : "Кислая, красная",
@@ -15,7 +15,7 @@
 		"img" : "cherry.png"
 	},
 
-	"3" : {
+	"Grape" : {
 		"name" : "Виноград",
 		"cost" : 76.3,
 		"description" : "Зеленый, вкусный",
@@ -23,7 +23,7 @@
 		"img" : "grape.png"
 	},
 
-	"4" : {
+	"Orange" : {
 		"name" : "Апельсин",
 		"cost" : 24.2,
 		"description" : "Круглый, зрелый",
