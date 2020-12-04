@@ -1,8 +1,9 @@
-var cart = {}; //корзина
+var cart = {}; 
 
 function init() {
-	$.getJSON("goods.json", goodsOut);
+	$.getJSON("goods.json", goodsOut); 
 }
+
 
 function goodsOut(data){
 	var out='';
