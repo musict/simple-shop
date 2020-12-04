@@ -1,15 +1,24 @@
 var cart = {}; 
 
 function init() {
-	$.getJSON("goods.json", goodsOut); 
+	// $.getJSON("goods.json", goodsOut);
+	$.post(
+			"admin/core.php",
+			{
+				"action" : "loadGoods"
+			},
+			goodsOut
+		); 
 }
 
 
 function goodsOut(data){
 	var out='';
+	data = JSON.parse(data);
 	for (var key in data){
 
         out +='<div class="cart">';
+        out +=`<button class="wishes" data-id="${key}">&#9825;</button>`;
         out +=`<p class="name">${data[key].name}</p>`;
         out +=`<img src="images/${data[key].img}" alt="">`;
         out +=`<div class="cost">${data[key].cost}</div>`;
@@ -19,6 +28,18 @@ function goodsOut(data){
 	}
 	$('.goods-out').html(out);
 	$('.add-to-cart').on('click', addToCart);
+	$('.wishes').on('click', addWishes);
+}
+
+function addWishes() {
+	var wishes = {};
+	if (localStorage.getItem('wishes')) {
+		wishes = JSON.parse(localStorage.getItem('wishes'));
+	}
+	alert('Добавлено в избранное');
+	var id = $(this).attr('data-id');
+	wishes[id] = 1;
+	localStorage.setItem('wishes', JSON.stringify(wishes));
 }
 
 function addToCart(){
