@@ -20,11 +20,11 @@ function goodsOut(data){
 		for (var key in wishes){
 
         out +='<div class="cart">';
-        out +=`<button class="wishes" data-id="${key}">&#10084;</button>`;
+        out +=`<button class="wishes" data-id="${key}">&#9825;</button>`;
         out +=`<p class="name">${data[key].name}</p>`;
         out +=`<img src="images/${data[key].img}" alt="">`;
         out +=`<div class="cost">${data[key].cost}</div>`;
-        out +=`<button><a href = "goods.html#${key}">Купить</a></button>`;
+        out +=`<a href = "goods.html#${key}">Подробнее</a>`;
         out +='</div>';
 
 		}
@@ -34,10 +34,21 @@ function goodsOut(data){
 	else {
 		$('.goods-out').html('Нет избранного');
 	}
+	$('.wishes').on('click', removeWishes);
 }
 
+function removeWishes() {
+	var wishes = {};
+	if (localStorage.getItem('wishes')) {
+		wishes = JSON.parse(localStorage.getItem('wishes'));
+	}
+	var id = $(this).attr('data-id');
+	delete wishes[id];
+	localStorage.setItem('wishes', JSON.stringify(wishes));
+	alert('Удалено из избранного');
+	init();
+}
 
 $(document).ready(function() {
 	init();
-	loadCart();
 });

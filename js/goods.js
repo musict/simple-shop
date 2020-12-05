@@ -2,33 +2,36 @@ var cart = {};
 
 function init() {
 	// $.getJSON("goods.json", goodsOut);
+	var hash = window.location.hash.substring(1);
+	console.log(hash);
 	$.post(
 			"admin/core.php",
 			{
-				"action" : "loadGoods"
+				"action" : "loadSingleGood",
+				"id" : hash
 			},
 			goodsOut
 		); 
 }
 
-
 function goodsOut(data){
-	var out='';
-	data = JSON.parse(data);
-	for (var key in data){
-
-        out +='<div class="cart">';
-        out +=`<button class="wishes" data-id="${key}">&#9825;</button>`;
-        out +=`<p class="name"><a href="goods.html#${key}">${data[key].name}</a></p>`;
-        out +=`<a href="goods.html#${key}"><img src="images/${data[key].img}" alt=""></a>`;
-        out +=`<div class="cost">${data[key].cost}</div>`;
-        out +=`<button class="add-to-cart" data-id="${key}">Купить</button>`;
-        out +='</div>';
-
+	if (data != 0) {
+		data = JSON.parse(data);
+		var out='';
+		out +='<div class="cart">';
+	    out +=`<button class="wishes" data-id="${data.id}">&#9825;</button>`;
+	    out +=`<p class="name">${data.name}</p>`;
+	    out +=`<img src="images/${data.img}" alt="">`;
+	    out +=`<div class="cost">${data.cost}</div>`;
+	    out +=`<button class="add-to-cart" data-id="${data.id}">Купить</button>`;
+	    out +='</div>';
+		$('.goods-out').html(out);
+		$('.add-to-cart').on('click', addToCart);
+		$('.wishes').on('click', addWishes);
+	} else {
+		$('.goods-out').html("Товар не найден");
 	}
-	$('.goods-out').html(out);
-	$('.add-to-cart').on('click', addToCart);
-	$('.wishes').on('click', addWishes);
+    
 }
 
 function addWishes() {

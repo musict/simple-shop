@@ -16,10 +16,16 @@ switch ($action) {
 		break;
 
 	case 'newGoods':
-	newGoods();
-	break;
+		newGoods();
+		break;
 
 	case 'loadGoods':
-	loadGoods();
-	break;
+		loadGoods();
+		break;
+
+	case 'loadSingleGood':
+		loadSingleGood();
+		break;
+
+	
 }
